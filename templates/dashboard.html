@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HoneyShield Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>HoneyShield</h1>
+        <p>Network Honeypot Threat Monitoring Dashboard</p>
+    </header>
+
+    <section class="cards">
+
+        <div class="card">
+            <h3>Total Events</h3>
+            <strong>{{ statistics.total }}</strong>
+        </div>
+
+        <div class="card">
+            <h3>High Severity</h3>
+            <strong>{{ statistics.high }}</strong>
+        </div>
+
+        <div class="card">
+            <h3>Medium Severity</h3>
+            <strong>{{ statistics.medium }}</strong>
+        </div>
+
+        <div class="card">
+            <h3>Low Severity</h3>
+            <strong>{{ statistics.low }}</strong>
+        </div>
+
+    </section>
+
+    <section class="services">
+
+        <h2>Service Activity</h2>
+
+        {% for service in statistics.services %}
+
+        <div class="service-row">
+            <span>{{ service.service }}</span>
+            <strong>{{ service.count }}</strong>
+        </div>
+
+        {% endfor %}
+
+    </section>
+
+    <section>
+
+        <h2>Captured Events</h2>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Time</th>
+                        <th>Source IP</th>
+                        <th>Source Port</th>
+                        <th>Destination</th>
+                        <th>Service</th>
+                        <th>Event</th>
+                        <th>Severity</th>
+                        <th>Message</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for event in events %}
+
+                    <tr>
+
+                        <td>{{ event.id }}</td>
+                        <td>{{ event.timestamp }}</td>
+                        <td>{{ event.source_ip }}</td>
+                        <td>{{ event.source_port }}</td>
+                        <td>{{ event.destination_port }}</td>
+                        <td>{{ event.service }}</td>
+                        <td>{{ event.event_type }}</td>
+                        <td class="{{ event.severity|lower }}">
+                            {{ event.severity }}
+                        </td>
+                        <td>{{ event.message }}</td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</div>
+
+</body>
+</html>
