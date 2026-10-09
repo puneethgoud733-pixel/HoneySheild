@@ -80,7 +80,7 @@ HoneyShield/
 ├── screenshots/
 │
 └── honeyshield.db
-Note: Adjust the filenames and folders above to match your actual project structure.
+
 ⚙️ Installation and Setup
 1. Clone the Repository
 git clone <YOUR_GITHUB_REPOSITORY_URL>
