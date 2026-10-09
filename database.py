@@ -1,12 +1,14 @@
 import sqlite3
+from pathlib import Path
 from config import DATABASE_PATH
 
-
 def get_connection():
-    connection = sqlite3.connect(DATABASE_PATH)
+    db_path = Path(DATABASE_PATH)
+    db_path.parent.mkdir(parents=True, exist_ok=True)
+
+    connection = sqlite3.connect(str(db_path))
     connection.row_factory = sqlite3.Row
     return connection
-
 
 def initialize_database():
     connection = get_connection()
